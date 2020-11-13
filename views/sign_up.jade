@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  form.form-signin(method="POST" action='')
+    h1.h3.mb-3.mt-5.font-weight-normal Please sign up
+
+    label.sr-only(for='firstName') First name
+    input#inputFirstName.form-control(type='text' placeholder='First name' required='true' autofocus='' name="firstName" value=(user ? user.first_name : ''))
+
+    label.sr-only(for='surname') Surname
+    input#inputSurname.form-control(type='text' placeholder='Surname' required='true' autofocus='' name="surname" value=(user ? user.last_name : ''))
+
+    label.sr-only(for='inputEmail') Email address
+    input#inputEmail.form-control(type='email' placeholder='Email address' required='true' autofocus='' name="email" value=(user ? user.username : ''))
+
+    label.sr-only(for='inputPassword') Password
+    input#inputPassword.form-control(type='password' placeholder='Password' required='true' name="password")
+
+    label.sr-only(for='confirmPassword') Confirm password
+    input#confirmPassword.form-control(type='password' placeholder='Confirm password' required='true' name="confirmPassword")
+
+    if errors
+      ul
+        for error in errors
+          li.text-danger!= error.msg
+    
+    button.btn.btn-lg.btn-primary.btn-block.mt-3(type='submit') Sign in

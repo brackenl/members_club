@@ -1,0 +1,36 @@
+// Fixed navbar
+nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
+  a.navbar-brand(href='/') The Clubhouse
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarCollapse.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item.active
+        a.nav-link(href='/')
+          | Home 
+          span.sr-only (current)
+      if currentUser
+        if currentUser && !currentUser.member
+          li.nav-item
+            a.nav-link(href='/join-club') Join the Club
+        li.nav-item
+          a.nav-link(href='/create-message') Create message
+        li.nav-item
+          a.nav-link(href='/users') Users
+
+    if currentUser
+      ul.navbar-nav.ml-auto
+        li.nav-item
+          a.nav-link(href='/log-out') Log out
+
+    else
+      ul.navbar-nav.ml-auto
+        li.nav-item
+          a.nav-link(href='/log-in') Log in
+        li.nav-item
+          a.nav-link(href='/sign-up') Sign up
+
+
+
+      //- li.nav-item
+      //-   a.nav-link.disabled(href='#' tabindex='-1' aria-disabled='true') Disabled

@@ -1,5 +1,27 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .container
+    div
+      if currentUser
+        h1 Welcome, #{currentUser.name}
+      else 
+        h1 Welcome to the Clubhouse
+
+      if text
+        p.text-danger!= text
+
+  .container.mt-5
+    .row
+       each message in messages
+        .col-md-4
+          h3!= message.title
+          blockquote.blockquote
+            | #{message.text}
+          if currentUser && currentUser.member
+            p.blockquote-footer!= message.user.name
+          p(style="font-size: 0.7rem")!= message.formatted_time
+
+      hr
+
+   
