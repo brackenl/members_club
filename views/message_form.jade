@@ -4,15 +4,15 @@ block content
   form.form-signin(method="POST" action='')
     h1.h3.mb-3.mt-5.font-weight-normal Create a message
 
-    label.sr-only(for='inputEmail') Email address
-    input#inputEmail.form-control(type='email' placeholder='Email address' required='true' autofocus='' name="username")
+    label.sr-only(for='inputTitle') Title
+    input#inputTitle.form-control(type='text' placeholder='Title' required='true' autofocus='' name="title" value=(message ? message.title : ''))
 
-    label.sr-only(for='inputPassword') Password
-    input#inputPassword.form-control(type='password' placeholder='Password' required='true' name="password")
+    label.sr-only(for='inputMessageText') Message text
+    textarea#inputMessageText.form-control(type='text' placeholder='Message text' required='true' autofocus='' name="messageText" rows="3" value=(message ? message.text : ''))
 
     if errors
       ul
         for error in errors
           li.text-danger!= error.msg
     
-    button.btn.btn-lg.btn-primary.btn-block.mt-3(type='submit') Sign in
+    button.btn.btn-lg.btn-primary.btn-block.mt-3(type='submit') Submit message

@@ -21,6 +21,6 @@ router.use("/sign-up", signUpRouter);
 router.use("/log-in", logInRouter);
 router.use("/log-out", logOutRouter);
 router.use("/join-club", joinClubRouter);
-router.use("/create-message", messageRouter);
+router.use("/message", messageRouter);
 
 module.exports = router;

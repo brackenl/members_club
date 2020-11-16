@@ -1,6 +1,7 @@
 var express = require("express");
 var bcrypt = require("bcrypt");
 const { body, check, validationResult } = require("express-validator");
+// const axios = require("axios");
 
 var User = require("../models/user");
 
@@ -28,16 +29,18 @@ router.post(
     // Extract the validation errors from a request.
     const errors = validationResult(req);
 
-    let user;
-    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-      user = new User({
-        username: req.body.email,
-        first_name: req.body.firstName,
-        last_name: req.body.surname,
-        password: hashedPassword,
-        member: false,
-      });
+    var hashedPassword = bcrypt.hashSync(req.body.password, 10);
+
+    var user = new User({
+      username: req.body.email,
+      first_name: req.body.firstName,
+      last_name: req.body.surname,
+      password: hashedPassword,
+      member: false,
+      admin: false,
     });
+
+    console.log(user);
 
     if (!errors.isEmpty()) {
       // There are errors. Render form again with sanitized values/error messages.
@@ -52,6 +55,8 @@ router.post(
         if (err) {
           return next(err);
         }
+
+        // res.render("index", { text: "Welcome, " + user.first_name });
         res.redirect("/");
       });
     }

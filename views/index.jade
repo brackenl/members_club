@@ -13,15 +13,21 @@ block content
 
   .container.mt-5
     .row
+      if messages
        each message in messages
-        .col-md-4
+        .col-md-4.mt-3
           h3!= message.title
           blockquote.blockquote
             | #{message.text}
           if currentUser && currentUser.member
             p.blockquote-footer!= message.user.name
           p(style="font-size: 0.7rem")!= message.formatted_time
+          if currentUser && currentUser.admin
+            button.btn.btn-danger.btn-block.delete-msg-bttn(type='button' id='#{message._id}') Delete
 
       hr
 
-   
+  script(src="/javascripts/deleteMessage.js")
+
+
+

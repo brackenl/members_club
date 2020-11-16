@@ -7,6 +7,7 @@ var session = require("express-session");
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 var bcrypt = require("bcrypt");
+var helmet = require("helmet");
 
 require("dotenv").config();
 
@@ -27,6 +28,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
+app.use(helmet());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -96,9 +98,12 @@ app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
+  /*
   // render the error page
   res.status(err.status || 500);
   res.render("error");
+  */
+  console.log(err);
 });
 
 module.exports = app;
